@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te amo meu amor</title>
+    <!-- Adicionando Google Font "Playwright Cuba" -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: #222;
+            color: white;
+            font-family: 'Playfair Display', serif; /* Alteração para a nova fonte */
+        }
+        #slideshow {
+            width: 90%;
+            max-width: 400px; /* Limitar o tamanho máximo da apresentação de slides */
+            height: auto;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        #slideshow img {
+            width: 100%;
+            height: auto;
+            opacity: 0;
+            position: absolute;
+            transition: opacity 1s ease-in-out;
+        }
+        #slideshow img.active {
+            opacity: 1;
+        }
+        #counter {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        #message {
+            text-align: center;
+            padding: 0 10px; /* Espaçamento para evitar textos muito colados */
+        }
+        /* Tornando o layout mais responsivo */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            #counter {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Apresentação de slides -->
+    <div id="slideshow">
+        <img src="img1.jpg" class="active" alt="Foto 1">
+        <img src="img2.jpg" alt="Foto 2">
+        <img src="img3.jpg" alt="Foto 3">
+        <img src="img4.jpg" alt="Foto 4">
+        <img src="img5.jpg" alt="Foto 5">
+        <img src="img6.jpeg" alt="Foto 6">
+        <img src="img7.jpeg" alt="Foto 7">
+        <img src="img8.jpeg" alt="Foto 8">
+        <img src="img9.jpeg" alt="Foto 9">
+    </div>
+
+    <!-- Contador de tempo -->
+    <div id="counter">Carregando contador...</div>
+
+    <!-- Mensagem personalizada -->
+    <div id="message">
+        <p>Oi Amor!<br>Você é o amor da minha vida toda, te amo muito! Agradeço muito por ter te encontrado, você é tudo de bom! 💞</p>
+    </div>
+
+    <script>
+        // Função para o slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('#slideshow img');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 3000); // Alterar a cada 3 segundos
+
+        // Função para o contador
+        function updateCounter() {
+            const startDate = new Date('May 31, 2024 14:15:00');
+            const now = new Date();
+            const difference = now - startDate;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('counter').innerHTML = 
+                `${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos`;
+        }
+
+        // Atualizar contador a cada segundo
+        setInterval(updateCounter, 1000);
+
+        // Iniciar o contador ao carregar a página
+        updateCounter();
+    </script>
+
+</body>
+</html>
